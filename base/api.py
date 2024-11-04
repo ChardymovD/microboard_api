@@ -11,12 +11,11 @@ class Microboard_board_api():
     """Метод для создания доски"""
 
     @staticmethod
-    def create_a_board():
+    def create_a_board(title_example, catalogid_example):
         json_for_create_a_board = {
-            "title": "",  # string, nullable: true
-            "catalogId": ""  # string($uuid), nullable: true
+            "title": f"{title_example}",  # string, nullable: true
+            "catalogId": f"{catalogid_example}"  # string($uuid), nullable: true
         }
-
         post_resource = "/boards"
         post_url = base_url + post_resource
         print(post_url)
@@ -49,10 +48,10 @@ class Microboard_board_api():
     """Метод для дублирования доски"""
 
     @staticmethod
-    def duplicate_a_board(board_id):
+    def duplicate_a_board(board_id, title_example, catalogid_example):
         json_for_duplicate_a_board = {
-            "catalogId": "",  # string($uuid), nullable: true
-            "title": ""  # string, nullable: true
+            "catalogId": f"{catalogid_example}",  # string($uuid), nullable: true
+            "title": f"{title_example}"  # string, nullable: true
         }
         post_resource = f"/boards/{board_id}/duplicate"
         post_url = base_url + post_resource
@@ -64,10 +63,10 @@ class Microboard_board_api():
     """Метод для добавления события на доску"""
 
     @staticmethod
-    def add_an_event_to_a_board(board_id):
+    def add_an_event_to_a_board(board_id, evevntid_example, eventbody_example):
         json_for_add_an_event_to_a_board = {
-            "eventId": "",  # string, *required
-            "eventBody": {} # *required
+            "eventId": f"{evevntid_example}",  # string, *required
+            "eventBody": {eventbody_example} # *required
         }
         post_resource = f"/boards/{board_id}/events"
         post_url = base_url + post_resource
@@ -90,9 +89,9 @@ class Microboard_board_api():
     """Метод для переименования доски"""
 
     @staticmethod
-    def rename_a_board(board_id):
+    def rename_a_board(board_id, newtitle_example):
         json_for_rename_a_board = {
-            "newTitle": ""  # string, *required
+            "newTitle": f"{newtitle_example}"  # string, *required
         }
         patch_resource = f"/boards/{board_id}"
         patch_url = base_url + patch_resource
