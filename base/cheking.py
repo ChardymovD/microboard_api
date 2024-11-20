@@ -53,7 +53,7 @@ class Cheking():
     def check_string_is_uri(response: Response, field_name):
         check = response.json()
         check_info = check.get(field_name)
-        uri_regex = re.compile(r"^https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)$")
+        uri_regex = re.compile(r"^\/[-a-zA-Z0-9@:%_\+.~#?&//=]+$")
         string_format = bool(uri_regex.match(check_info))
         if string_format is True:
             print(field_name + " соответствует формату $uri")
