@@ -1,3 +1,4 @@
+import allure
 import requests
 from base.logger import Logger
 
@@ -22,29 +23,33 @@ class Http_method():
 
     @staticmethod
     def get(url, use_auth = True):
-        Logger.add_request(url, method="GET")
-        result = requests.get(url, headers=Http_method.get_headers(use_auth), cookies=Http_method.cookie)
-        Logger.add_response(result)
-        return result
+        with allure.step("GET"):
+            Logger.add_request(url, method="GET")
+            result = requests.get(url, headers=Http_method.get_headers(use_auth), cookies=Http_method.cookie)
+            Logger.add_response(result)
+            return result
 
     @staticmethod
     def post(url, body, use_auth = True):
-        Logger.add_request(url, method="POST")
-        result = requests.post(url, json=body, headers=Http_method.get_headers(use_auth), cookies=Http_method.cookie)
-        Logger.add_response(result)
-        return result
+        with allure.step("POST"):
+            Logger.add_request(url, method="POST")
+            result = requests.post(url, json=body, headers=Http_method.get_headers(use_auth), cookies=Http_method.cookie)
+            Logger.add_response(result)
+            return result
 
     @staticmethod
     def patch(url, body, use_auth = True):
-        Logger.add_request(url, method="PATCH")
-        result = requests.patch(url, json=body, headers=Http_method.get_headers(use_auth), cookies=Http_method.cookie)
-        Logger.add_response(result)
-        return result
+        with allure.step("PATCH"):
+            Logger.add_request(url, method="PATCH")
+            result = requests.patch(url, json=body, headers=Http_method.get_headers(use_auth), cookies=Http_method.cookie)
+            Logger.add_response(result)
+            return result
 
     @staticmethod
     def delete(url, use_auth = True):
-        Logger.add_request(url, method="DELETE")
-        result = requests.delete(url, headers=Http_method.get_headers(use_auth), cookies=Http_method.cookie)
-        Logger.add_response(result)
-        return result
+        with allure.step("DELETE"):
+            Logger.add_request(url, method="DELETE")
+            result = requests.delete(url, headers=Http_method.get_headers(use_auth), cookies=Http_method.cookie)
+            Logger.add_response(result)
+            return result
 

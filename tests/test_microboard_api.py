@@ -1,4 +1,5 @@
 import pytest
+import allure
 from requests import Response
 from base.cheking import Cheking
 from base.api import Microboard_board_api
@@ -13,10 +14,11 @@ def board_data():
     if 'boardId' in data:
         Microboard_board_api.delete_a_board(data['boardId'])
 
-
+@allure.epic("Test Board API")
 class Test_Board_api():
 
     """Создание новой доски"""
+    @allure.description("Create a board")
     def test_create_a_board(self):
         print("Метод POST")
         result_post: Response = Microboard_board_api.create_a_board("", "root", use_auth=True)
@@ -35,6 +37,7 @@ class Test_Board_api():
         Cheking.check_status_code(result_get, 200)
 
     """Дублирование доски"""
+    @allure.description("Duplicate a board")
     def test_duplicate_a_board(self, board_data):
         print("Метод POST")
         board_id = board_data["boardId"]
@@ -53,6 +56,7 @@ class Test_Board_api():
 
 
     """Переименование доски"""
+    @allure.description("Rename a board")
     def test_rename_a_board(self, board_data):
         print("Метод PATCH")
         board_id = board_data["boardId"]
@@ -65,6 +69,7 @@ class Test_Board_api():
 
 
     """Удаление доски"""
+    @allure.description("Delete a board")
     def test_delete_a_board(self, board_data):
         print("Метод DELETE")
         board_id = board_data["boardId"]
